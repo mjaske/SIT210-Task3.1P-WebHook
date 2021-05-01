@@ -1,0 +1,21 @@
+#include "Adafruit_DHT.h"
+
+#define DHTTYPE DHT11
+#define DHTPIN 3
+
+String temp;
+
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  dht.begin();
+  pinMode (D3, INPUT);
+}
+
+void loop() {
+  temp = String(dht.getTempCelcius());
+
+  Particle.publish("temp", temp, PRIVATE);
+
+  delay(30000);
+}
